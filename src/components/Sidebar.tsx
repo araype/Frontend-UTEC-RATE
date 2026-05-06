@@ -6,7 +6,6 @@ import type { ComponentType } from 'react'
 import type { IconProps } from '@phosphor-icons/react'
 import { 
   SquaresFour, 
-  Books, 
   ChatTeardropDots, 
   Lightning, 
   UserCircle 
@@ -14,6 +13,7 @@ import {
 import { HiOutlineSparkles } from 'react-icons/hi2'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import ThemeToggle from './ThemeToggle'
 
 interface MenuItem {
   icon: ComponentType<IconProps>
@@ -22,8 +22,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { icon: SquaresFour, label: 'Dashboard', path: '/dashboard' },
-  { icon: Books, label: 'Cursos', path: '/courses' },
+  { icon: SquaresFour, label: 'Carreras', path: '/careers' },
   { icon: ChatTeardropDots, label: 'Mis Reviews', path: '/reviews' },
   { icon: Lightning, label: 'Insights AI', path: '/insights' },
   { icon: UserCircle, label: 'Perfil', path: '/profile' },
@@ -40,16 +39,22 @@ function Sidebar() {
   }
 
   const isPathActive = (path: string) => {
-    if (path === '/courses' && location.pathname.startsWith('/course/')) {
+    if (
+      path === '/careers' &&
+      (location.pathname.startsWith('/careers/') ||
+        location.pathname.startsWith('/courses/') ||
+        location.pathname.startsWith('/professors/') ||
+        location.pathname === '/dashboard')
+    ) {
       return true
     }
     return location.pathname === path || location.pathname.startsWith(`${path}/`)
   }
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 flex w-24 flex-col border-r border-white/5 bg-[#020617]/80 backdrop-blur-xl transition-all duration-300 md:w-72">
+    <aside className="fixed inset-y-0 left-0 z-50 flex w-24 flex-col border-r border-card-border bg-background/80 backdrop-blur-xl transition-all duration-300 md:w-72">
       {/* Sidebar Header */}
-      <div className="flex h-24 items-center border-b border-white/5 px-6">
+      <div className="flex h-24 items-center justify-between border-b border-card-border px-6">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-lg shadow-primary/20 border border-white/10 overflow-hidden">
             <img
@@ -59,9 +64,12 @@ function Sidebar() {
             />
           </div>
           <div className="hidden md:block">
-            <h2 className="font-display text-xl font-bold tracking-tight text-white">URATE</h2>
+            <h2 className="font-display text-xl font-bold tracking-tight text-foreground">URATE</h2>
             <p className="text-[10px] font-bold uppercase tracking-widest text-primary">Academic Hub</p>
           </div>
+        </div>
+        <div className="hidden md:block">
+          <ThemeToggle />
         </div>
       </div>
 
@@ -82,7 +90,7 @@ function Sidebar() {
               className={`group relative flex items-center gap-3 rounded-2xl px-4 py-4 text-sm font-semibold transition-all duration-300 ${
                 active
                   ? 'bg-primary/10 text-primary shadow-[inset_0_0_20px_rgba(59,130,246,0.1)]'
-                  : 'text-secondary hover:bg-white/5 hover:text-white'
+                  : 'text-secondary hover:bg-foreground/5 hover:text-foreground'
               }`}
             >
               {active && (
@@ -104,17 +112,21 @@ function Sidebar() {
       </nav>
 
       {/* Sidebar Footer */}
-      <div className="border-t border-white/5 p-4 space-y-4">
-        <div className="hidden md:block p-4 rounded-2xl bg-white/5 border border-white/5">
+      <div className="border-t border-card-border p-4 space-y-4">
+        <div className="hidden md:block p-4 rounded-2xl bg-foreground/5 border border-card-border">
           <div className="flex items-center gap-3 mb-3">
             <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
               <HiOutlineSparkles className="h-4 w-4 text-primary" />
             </div>
-            <span className="text-xs font-bold text-white">AI Insights</span>
+            <span className="text-xs font-bold text-foreground">AI Insights</span>
           </div>
           <p className="text-[10px] text-secondary leading-relaxed">
             Revisa los nuevos resúmenes generados por nuestra IA.
           </p>
+        </div>
+        
+        <div className="md:hidden flex justify-center py-2">
+          <ThemeToggle />
         </div>
 
         <button

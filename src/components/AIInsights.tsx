@@ -48,13 +48,13 @@ function AIInsights({ averageRating }: AIInsightsProps) {
   const insight = getInsightDetails(averageRating)
   
   return (
-    <section className={`relative overflow-hidden rounded-[2rem] border p-6 md:p-8 transition-all ${insight.color} border-white/5 shadow-xl`}>
+    <section className={`relative overflow-hidden rounded-[2rem] border p-6 md:p-8 transition-all ${insight.color} border-card-border shadow-xl`}>
       <div className="absolute top-0 right-0 -mr-8 -mt-8 h-48 w-48 opacity-[0.03] rotate-12">
-        <BrainCircuit className="h-full w-full text-white" />
+        <BrainCircuit className="h-full w-full text-foreground" />
       </div>
 
       <div className="flex flex-col md:flex-row md:items-center gap-6">
-        <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/5 border border-white/10 shadow-inner`}>
+        <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-foreground/5 border border-card-border shadow-inner`}>
           {insight.icon}
         </div>
         
@@ -63,7 +63,7 @@ function AIInsights({ averageRating }: AIInsightsProps) {
             <h2 className={`text-xl font-bold font-display ${insight.accent}`}>
               {insight.title}
             </h2>
-            <span className="rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-secondary/70 border border-white/5">
+            <span className="rounded-full bg-foreground/5 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-secondary/70 border border-card-border">
               AI Analysis
             </span>
           </div>

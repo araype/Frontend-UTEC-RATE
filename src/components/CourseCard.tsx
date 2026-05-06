@@ -10,48 +10,53 @@ interface CourseCardProps {
 function CourseCard({ course }: CourseCardProps) {
   return (
     <Link
-      to={`/course/${course.id}`}
-      className="group glass-card relative flex flex-col overflow-hidden rounded-[2rem] p-6"
+      to={`/courses/${course.id}/professors`}
+      className="group glass-card relative flex flex-col overflow-hidden rounded-2xl p-4 transition-all hover:border-primary/30"
     >
-      <div className="absolute top-0 right-0 p-4 opacity-0 transition-all duration-300 translate-x-2 -translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-primary backdrop-blur-md border border-primary/20">
-          <ArrowSquareOut size={20} weight="bold" />
+      <div className="absolute top-0 right-0 p-3 opacity-0 transition-all duration-300 translate-x-2 -translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/20 text-primary backdrop-blur-md border border-primary/20">
+          <ArrowSquareOut size={16} weight="bold" />
         </div>
       </div>
 
       <div className="flex-1">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary border border-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:rotate-3">
-            <BookBookmark size={24} weight="duotone" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:rotate-3">
+            <BookBookmark size={20} weight="duotone" />
           </div>
-          <div>
-            <h3 className="text-xl font-bold text-white font-display leading-tight group-hover:text-primary transition-colors">
+          <div className="min-w-0">
+            <h3 className="text-base font-bold text-foreground font-display leading-tight group-hover:text-primary transition-colors line-clamp-1">
               {course.name}
             </h3>
-            <p className="text-xs font-bold text-secondary/50 uppercase tracking-widest mt-0.5">
+            <p className="text-[10px] font-bold text-secondary/40 uppercase tracking-widest mt-0.5">
               {course.code}
             </p>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center gap-2 text-sm text-secondary font-medium">
-            <UserCircle size={18} weight="bold" className="text-primary/60" />
-            <span>Prof. <span className="text-white">{course.professor}</span></span>
+        <div className="space-y-3">
+          <p className="text-xs text-secondary/70 line-clamp-2 leading-relaxed h-8">
+            {course.description}
+          </p>
+
+          <div className="flex items-center gap-2 text-xs text-secondary/60 font-medium">
+            <UserCircle size={16} weight="bold" className="text-primary/40" />
+            <span>
+              <span className="text-foreground/80">{course.professorsCount}</span> profesores
+            </span>
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-white/5">
-            <div className="space-y-1">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Calificación</p>
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-extrabold text-white">{course.rating.toFixed(1)}</span>
-                <StarRating rating={course.rating} />
+          <div className="flex items-center justify-between pt-3 border-t border-card-border">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-black text-foreground">{course.averageRating.toFixed(1)}</span>
+              <div className="scale-75 origin-left">
+                <StarRating rating={course.averageRating} />
               </div>
             </div>
             
             <div className="text-right">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-secondary/50">Reseñas</p>
-              <p className="text-sm font-bold text-white">{course.reviewsCount}</p>
+              <span className="text-[10px] font-bold text-secondary/40 uppercase tracking-widest">Reseñas: </span>
+              <span className="text-xs font-bold text-foreground/80">{course.reviewsCount}</span>
             </div>
           </div>
         </div>

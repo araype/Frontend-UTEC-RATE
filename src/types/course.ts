@@ -1,9 +1,10 @@
 export interface Course {
   id: number
+  careerId: number
   code: string
   name: string
-  professor: string
-  rating: number
+  description: string
+  averageRating: number
   reviewsCount: number
-  studentsCount: number
+  professorsCount: number
 }

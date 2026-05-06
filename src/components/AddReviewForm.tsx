@@ -32,13 +32,13 @@ function AddReviewForm({ onAddReview }: AddReviewFormProps) {
   }
 
   return (
-    <section className="glass-panel rounded-[2rem] p-6 border border-white/5 shadow-2xl">
+    <section className="glass-panel rounded-[2rem] p-6 border border-card-border shadow-2xl">
       <div className="flex items-center gap-3 mb-6">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary border border-primary/10">
           <MessageSquarePlus className="h-5 w-5" />
         </div>
         <div>
-          <h2 className="text-xl font-bold text-white font-display">Nueva Reseña</h2>
+          <h2 className="text-xl font-bold text-foreground font-display">Nueva Reseña</h2>
           <p className="text-xs font-medium text-secondary">Tu opinión ayuda a la comunidad</p>
         </div>
       </div>
@@ -48,9 +48,9 @@ function AddReviewForm({ onAddReview }: AddReviewFormProps) {
           <label className="text-xs font-bold uppercase tracking-widest text-secondary/70 ml-1">
             Calificación General
           </label>
-          <div className="flex items-center gap-4 rounded-2xl bg-white/5 p-4 border border-white/5">
+          <div className="flex items-center gap-4 rounded-2xl bg-foreground/5 p-4 border border-card-border">
             <StarRating rating={rating} onChange={setRating} readOnly={false} size="lg" />
-            <span className="text-sm font-bold text-white">
+            <span className="text-sm font-bold text-foreground">
               {rating > 0 ? `${rating}.0 / 5` : 'Selecciona'}
             </span>
           </div>
@@ -66,7 +66,7 @@ function AddReviewForm({ onAddReview }: AddReviewFormProps) {
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               placeholder="¿Qué te pareció el curso? ¿Cómo es la metodología del profesor?"
-              className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-white placeholder:text-white/20 outline-none transition-all focus:border-primary/50 focus:bg-white/10 focus:ring-4 focus:ring-primary/10 text-sm leading-relaxed"
+              className="w-full resize-none rounded-2xl border border-card-border bg-foreground/5 px-4 py-4 text-foreground placeholder:text-foreground/20 outline-none transition-all focus:border-primary/50 focus:bg-foreground/10 focus:ring-4 focus:ring-primary/10 text-sm leading-relaxed"
             />
           </div>
         </div>

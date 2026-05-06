@@ -1,4 +1,8 @@
-import type { AuthResponse, LoginCredentials } from '../types/auth'
+import type {
+  AuthResponse,
+  LoginCredentials,
+  RegisterCredentials,
+} from '../types/auth'
 
 const VALID_EMAIL = 'admin@urate.com'
 const VALID_PASSWORD = 'admin123'
@@ -24,6 +28,29 @@ const login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
   throw new Error('Credenciales incorrectas')
 }
 
+const loginWithGoogle = async (): Promise<AuthResponse> => {
+  await wait(400)
+  localStorage.setItem(TOKEN_KEY, FAKE_JWT_TOKEN)
+  return { token: FAKE_JWT_TOKEN }
+}
+
+const register = async (credentials: RegisterCredentials): Promise<AuthResponse> => {
+  await wait(500)
+
+  if (!credentials.fullName.trim()) {
+    throw new Error('Ingresa tu nombre completo')
+  }
+
+  localStorage.setItem(TOKEN_KEY, FAKE_JWT_TOKEN)
+  return { token: FAKE_JWT_TOKEN }
+}
+
+const registerWithGoogle = async (): Promise<AuthResponse> => {
+  await wait(400)
+  localStorage.setItem(TOKEN_KEY, FAKE_JWT_TOKEN)
+  return { token: FAKE_JWT_TOKEN }
+}
+
 const logout = () => {
   localStorage.removeItem(TOKEN_KEY)
 }
@@ -36,5 +63,8 @@ export const authService = {
   getToken,
   isAuthenticated,
   login,
+  loginWithGoogle,
   logout,
+  register,
+  registerWithGoogle,
 }
