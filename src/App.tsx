@@ -13,7 +13,9 @@ import Profile from './pages/Profile'
 import Register from './pages/Register'
 import Reviews from './pages/Reviews'
 
-// Nuevas rutas de Roles y Entidades
+import AdminPanel from './pages/AdminPanel'
+import ProfessorPanel from './pages/ProfessorPanel'
+import StudentPanel from './pages/StudentPanel'
 import AdminCareers from './pages/admin/AdminCareers'
 import AdminCourses from './pages/admin/AdminCourses'
 import AdminUsers from './pages/admin/AdminUsers'
@@ -46,6 +48,9 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
+            {/* Student Routes */}
+            <Route path="/student" element={<StudentPanel />} />
+
             {/* Student & Shared Routes */}
             <Route path="/careers" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -58,12 +63,14 @@ function App() {
             <Route path="/profile" element={<Profile />} />
 
             {/* Admin Routes */}
+            <Route path="/admin" element={<AdminPanel />} />
             <Route path="/admin/careers" element={<AdminCareers />} />
             <Route path="/admin/courses" element={<AdminCourses />} />
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/reviews" element={<AdminReviews />} />
 
             {/* Professor Routes */}
+            <Route path="/professor" element={<ProfessorPanel />} />
             <Route path="/professor/courses" element={<ProfessorCourses />} />
           </Route>
         </Route>

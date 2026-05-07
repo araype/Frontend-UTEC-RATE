@@ -1,6 +1,14 @@
 import { useCallback } from 'react'
 import { authService } from '../services/authService'
-import type { LoginCredentials, RegisterCredentials } from '../types/auth'
+import type { LoginCredentials, RegisterCredentials, Role } from '../types/auth'
+
+const ROLE_REDIRECT: Record<Role, string> = {
+  ADMIN: '/admin',
+  PROFESSOR: '/professor',
+  STUDENT: '/student',
+}
+
+export const getRoleRedirect = (role: Role): string => ROLE_REDIRECT[role] ?? '/careers'
 
 export const useAuth = () => {
   const login = useCallback(
@@ -8,8 +16,8 @@ export const useAuth = () => {
     [],
   )
 
-  const logout = useCallback(() => {
-    authService.logout()
+  const logout = useCallback(async () => {
+    await authService.logout()
   }, [])
 
   const loginWithGoogle = useCallback(async () => authService.loginWithGoogle(), [])
@@ -19,10 +27,7 @@ export const useAuth = () => {
     [],
   )
 
-  const registerWithGoogle = useCallback(
-    async () => authService.registerWithGoogle(),
-    [],
-  )
+  const registerWithGoogle = useCallback(async () => authService.loginWithGoogle(), [])
 
   const token = authService.getToken()
   const user = authService.getUser()

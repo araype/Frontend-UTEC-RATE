@@ -23,25 +23,22 @@ function Sidebar() {
   const getMenuItems = () => {
     if (isAdmin) {
       return [
-        { icon: SquaresFour, label: 'Carreras', path: '/admin/careers' },
-        { icon: SquaresFour, label: 'Cursos', path: '/admin/courses' },
-        { icon: UserCircle, label: 'Usuarios', path: '/admin/users' },
-        { icon: ChatTeardropDots, label: 'Moderación', path: '/admin/reviews' },
+        { icon: SquaresFour, label: 'Panel Admin', path: '/admin' },
         { icon: UserCircle, label: 'Perfil', path: '/profile' },
       ]
     }
-    
+
     if (isProfessor) {
       return [
-        { icon: SquaresFour, label: 'Mis Cursos', path: '/professor/courses' },
+        { icon: SquaresFour, label: 'Mis Cursos', path: '/professor' },
         { icon: UserCircle, label: 'Perfil', path: '/profile' },
       ]
     }
 
     // Default to student
     return [
+      { icon: SquaresFour, label: 'Mi Panel', path: '/student' },
       { icon: SquaresFour, label: 'Carreras', path: '/careers' },
-      { icon: ChatTeardropDots, label: 'Mis Reviews', path: '/reviews' },
       { icon: Lightning, label: 'Insights AI', path: '/insights' },
       { icon: UserCircle, label: 'Perfil', path: '/profile' },
     ]
@@ -49,8 +46,8 @@ function Sidebar() {
 
   const menuItems = getMenuItems()
 
-  const handleLogout = () => {
-    logout()
+  const handleLogout = async () => {
+    await logout()
     navigate('/login', { replace: true })
   }
 
@@ -64,6 +61,9 @@ function Sidebar() {
     ) {
       return true
     }
+    if (path === '/admin') return location.pathname.startsWith('/admin')
+    if (path === '/professor') return location.pathname.startsWith('/professor')
+    if (path === '/student') return location.pathname === '/student'
     return location.pathname === path || location.pathname.startsWith(`${path}/`)
   }
 

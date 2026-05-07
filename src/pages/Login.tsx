@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth, getRoleRedirect } from '../hooks/useAuth'
 import { EnvelopeSimple, LockKey } from '@phosphor-icons/react'
 import { HiOutlineShieldCheck } from 'react-icons/hi2'
 import { motion } from 'framer-motion'
@@ -25,8 +25,8 @@ function Login() {
     setIsLoading(true)
 
     try {
-      await loginWithGoogle()
-      navigate('/careers', { replace: true })
+      const { user } = await loginWithGoogle()
+      navigate(getRoleRedirect(user.role), { replace: true })
     } catch {
       setError('No se pudo iniciar sesión con Google')
     } finally {
@@ -40,8 +40,8 @@ function Login() {
     setIsLoading(true)
 
     try {
-      await login({ email, password })
-      navigate('/careers', { replace: true })
+      const { user } = await login({ email, password })
+      navigate(getRoleRedirect(user.role), { replace: true })
     } catch (loginError) {
       const message =
         loginError instanceof Error
@@ -178,9 +178,18 @@ function Login() {
               Iniciar sesión con Google
             </button>
 
-            <p className="text-center text-xs font-medium text-secondary/60">
-              Usa las credenciales de prueba: <span className="text-primary/80">admin@urate.com / admin123</span>
-            </p>
+            {import.meta.env.VITE_MOCK_AUTH === 'true' ? (
+              <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/10 px-4 py-3 text-xs text-yellow-400 space-y-1">
+                <p className="font-bold uppercase tracking-wider">Modo mock activo</p>
+                <p>admin@utec.edu.pe / admin123</p>
+                <p>juan.perez@utec.edu.pe / profesor123</p>
+                <p>maria.garcia@utec.edu.pe / estudiante123</p>
+              </div>
+            ) : (
+              <p className="text-center text-xs font-medium text-secondary/60">
+                Ingresa con tu correo institucional UTEC
+              </p>
+            )}
 
             <p className="text-center text-sm text-secondary">
               ¿No tienes cuenta?{' '}
