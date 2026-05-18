@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { type InternalAxiosRequestConfig } from 'axios'
 
 const ms1 = axios.create({
   baseURL: import.meta.env.VITE_MS1_URL ?? 'http://localhost:3001',
@@ -12,7 +12,7 @@ const ms3 = axios.create({
   baseURL: import.meta.env.VITE_MS3_URL ?? 'http://localhost:3003',
 })
 
-const authInterceptor = (config: Parameters<Parameters<typeof ms1.interceptors.request.use>[0]>[0]) => {
+const authInterceptor = (config: InternalAxiosRequestConfig) => {
   const token = localStorage.getItem('accessToken')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`

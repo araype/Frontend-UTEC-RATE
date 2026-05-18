@@ -2,13 +2,10 @@ import {
   LogOut,
   ChevronRight
 } from 'lucide-react'
-import type { ComponentType } from 'react'
-import type { IconProps } from '@phosphor-icons/react'
-import { 
-  SquaresFour, 
-  ChatTeardropDots, 
-  Lightning, 
-  UserCircle 
+import {
+  SquaresFour,
+  Lightning,
+  UserCircle
 } from '@phosphor-icons/react'
 import { HiOutlineSparkles } from 'react-icons/hi2'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
@@ -18,7 +15,7 @@ import ThemeToggle from './ThemeToggle'
 function Sidebar() {
   const location = useLocation()
   const navigate = useNavigate()
-  const { logout, isAdmin, isStudent, isProfessor } = useAuth()
+  const { logout, isAdmin, isProfessor } = useAuth()
 
   const getMenuItems = () => {
     if (isAdmin) {

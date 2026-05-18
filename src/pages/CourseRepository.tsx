@@ -1,10 +1,7 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useAuth } from '../hooks/useAuth'
 
 export default function CourseRepository() {
   const { courseId } = useParams()
-  const { isProfessor, isStudent } = useAuth()
 
   return (
     <div className="p-8">
